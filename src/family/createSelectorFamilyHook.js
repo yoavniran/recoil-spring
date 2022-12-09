@@ -9,7 +9,7 @@ import getFamilyTrackerSetters from "./getFamilyTrackerSetters";
 //TODO: in case setter is a selector, we cant make use of the tracker! need to warn about this
 //TODO: Need to support useResetRecoilState - https://recoiljs.org/docs/api-reference/core/useResetRecoilState
 
-const createSelector = ({ key, allowWrite, getter, setter, isGetterRecoilVal }) => {
+const createSelector = ({ key, allowWrite, getter, setter, isGetterRecoilVal, selectorParams }) => {
 	return selectorFamily({
 		key,
 		set: allowWrite ?
@@ -33,10 +33,12 @@ const createSelector = ({ key, allowWrite, getter, setter, isGetterRecoilVal }) 
 			get(getter(param)) :
 			//use custom getter
 			getter(param, get),
+
+		...selectorParams,
 	});
 };
 
-const createSelectorFamilyHook = (key, getter, setter) => {
+const createSelectorFamilyHook = (key, getter, setter, selectorParams = {}) => {
 	if (!isString(key)) {
 		setter = getter;
 		getter = key;
@@ -58,13 +60,14 @@ const createSelectorFamilyHook = (key, getter, setter) => {
 		getter,
 		setter,
 		isGetterRecoilVal,
+		selectorParams,
 	});
 
 	const useHook = (hookParam) =>
 		!allowWrite ?
 			//read only
 			useRecoilValue(selector(hookParam)) :
-			//use callback to be able to return value, setter tuple
+			//use callback to be able to return [value, setter] tuple
 			useRecoilCallback(({ set }) => (autoParam) => {
 				return [
 					!isEmpty(autoParam) && useRecoilValue(selector(autoParam)),

@@ -31,6 +31,7 @@ const TooltipIconButton = forwardRef((
 		tooltipSeverity = "info",
 		tooltipDelay = 100,
 		tooltipSimple = false,
+		showDisabledDot = false,
 		icon,
 		...buttonProps
 	}, ref) => {
@@ -53,7 +54,7 @@ const TooltipIconButton = forwardRef((
 				component={isDisabled ? "div" : undefined}
 				{...buttonProps}
 			>
-				{isDisabled &&
+				{isDisabled && showDisabledDot &&
 					<Badge variant="dot" color="error"/>}
 				{icon}
 			</StyledIconButton>

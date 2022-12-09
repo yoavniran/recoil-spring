@@ -43,6 +43,7 @@ const updateAtomTracker = (getAtomsData, atom, fn) => {
 			const trackerName = findTrackerNameInStore(atomName, getAtomsData);
 
 			if (trackerName && familyKeyParts[1]) {
+				//use JSON.parse like recoil does
 				const param = JSON.parse(familyKeyParts[1]);
 				fn(trackerName, param);
 			}

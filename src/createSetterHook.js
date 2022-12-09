@@ -12,7 +12,7 @@ const createSetterHook = (setter) =>
 
 		return (...args) => {
 			const trackerSetters = getFamilyTrackerSetters({
-				...actions, getAtomsData,
+				get, ...actions, getAtomsData,
 			});
 
 			return setter({ ...actions, ...trackerSetters, get }, ...args);
