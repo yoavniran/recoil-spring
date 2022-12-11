@@ -8,11 +8,11 @@ const createSetterHook = (setter) =>
 			//TODO: might not be loaded yet...
 			actions.snapshot.getLoadable(loadable).contents;
 
-		const { getAtomsData } = get(DUMMY_RECOIL_SPRING_ATOM);
+		const spring = get(DUMMY_RECOIL_SPRING_ATOM);
 
 		return (...args) => {
 			const trackerSetters = getFamilyTrackerSetters({
-				get, ...actions, getAtomsData,
+				get, ...actions, spring,
 			});
 
 			return setter({ ...actions, ...trackerSetters, get }, ...args);

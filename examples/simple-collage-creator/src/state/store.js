@@ -38,18 +38,19 @@ const DEFAULTS = {
 
 const spring = createSpring({ ...DEFAULTS });
 
-const atoms = spring.getAtoms();
+const atoms = spring.atoms;
 
 export default atoms;
+
+console.log("ATOMS !!!! ", atoms);
+console.log("ATOMS KEYS ", Object.keys(atoms));
+
+delete atoms.collageSize;
+
+spring.add("test111", null);
 
 export {
 	DEFAULTS,
 	spring,
-	// createSelectorFamilyHook,
-	// createTrackerSelectorHook,
-	// createRecoilHistoryHook,
-	// createTransactionHookSetter,
-	// createCallbackSetter,
-	// useRecoilLocalStorageInitializer,
 };
 

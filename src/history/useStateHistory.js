@@ -10,11 +10,9 @@ import { useSpring } from "../context";
 
 const DEFAULT_MAX_ITEMS = 10;
 
-const getAtomsForDiff = (include, getAtomsData) => {
-	const { atoms } = getAtomsData();
-	return include.map((a) => isRecoilValue(a) ?
-		a :
-		atoms[findTrackerNameInStore(getAtomFamilyRootName(a), getAtomsData)]);
+const getAtomsForDiff = (include, spring) => {
+	return include.map((a) =>
+		isRecoilValue(a) ? a : spring.getTrackerAtom(a));
 };
 
 const getHasDiffs = (snapshot, prevSnapshot, atoms) => {
@@ -28,9 +26,9 @@ const getHasDiffs = (snapshot, prevSnapshot, atoms) => {
 		});
 };
 
-const getHistoryAtoms = (include, getAtomsData) => {
+const getHistoryAtoms = (include, spring) => {
 	//if include not provided, use all atoms in spring
-	const usedInclude = include ? include : Object.values(getAtomsData().atoms);
+	const usedInclude = include ? include : spring.getAtomsList();
 	const undefIndx = usedInclude.findIndex((a) => !a);
 
 	if (~undefIndx) {
@@ -41,14 +39,14 @@ const getHistoryAtoms = (include, getAtomsData) => {
 };
 
 const useStateHistory = ({ include, maxItems = DEFAULT_MAX_ITEMS, navMutator = null }) => {
-	const { getAtomsData } = useSpring() || {};
+	const spring = useSpring() || {};
 
-	if (!getAtomsData) {
-		throw new Error("recoil:spring - couldn't find Atoms Data from Context for State History");
+	if (!spring) {
+		throw new Error("recoil:spring - couldn't find Spring instance from Context for State History");
 	}
 
-	const usedInclude = getHistoryAtoms(include, getAtomsData);
-	const diffAtoms = getAtomsForDiff(usedInclude, getAtomsData);
+	const usedInclude = getHistoryAtoms(include, spring);
+	const diffAtoms = getAtomsForDiff(usedInclude, spring);
 
 	const {
 		doTimeTravel,

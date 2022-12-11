@@ -1,6 +1,5 @@
 import { selector, isRecoilValue } from "recoil";
-import { DUMMY_RECOIL_SPRING_ATOM } from "./consts";
-import { getTrackerForAtom } from "./family";
+import { getTracker } from "./family";
 
 const createSelector = (getter, setter = null, key = null, selectorParams = {}) => {
 	if (!getter && !setter) {
@@ -15,13 +14,6 @@ const createSelector = (getter, setter = null, key = null, selectorParams = {}) 
 	if (!usedKey) {
 		throw new Error("recoil:spring - Selector key not provided and could not be generated");
 	}
-
-	const getTracker = (get, atomFamily) => {
-		const { getAtomsData } = get(DUMMY_RECOIL_SPRING_ATOM),
-			trackerAtom = getTrackerForAtom(atomFamily, getAtomsData);
-
-		return get(trackerAtom);
-	};
 
 	const hookSelector = selector({
 		key: usedKey,

@@ -4,4 +4,4 @@ export useCollageReset from "./useCollageReset";
 export useRemoveNotificationOfType from "./useRemoveNotificationOfType";
 export useClearCollagePhotos from "./useClearCollagePhotos"
 // export useCollageGenerator from "./useCollageGenerator";
-// export useFillGridPhotos from "./useFillGridPhotos";
+export useFillSlots from "./useFillSlots";

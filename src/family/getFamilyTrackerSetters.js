@@ -1,9 +1,9 @@
-import { getTrackerForAtom, updateAtomTracker } from "./familyTrackerAtom";
+import { updateAtomTracker } from "./familyTrackerAtom";
 
-const getFamilyTrackerSetters = ({ get, set, reset, getAtomsData }) => {
+const getFamilyTrackerSetters = ({ get, set, reset, spring }) => {
 	const setWithTracker = (atom, val) => {
-		updateAtomTracker(getAtomsData, atom, (trackerName, param) => {
-			set(getAtomsData().atoms[trackerName], (prev) =>
+		updateAtomTracker(spring, atom, (trackerName, param) => {
+			set(spring.getAtom(trackerName), (prev) =>
 				prev.includes(param) ? prev : [...prev, param]);
 		});
 
@@ -11,8 +11,8 @@ const getFamilyTrackerSetters = ({ get, set, reset, getAtomsData }) => {
 	};
 
 	const resetWithTracker = (atom) => {
-		updateAtomTracker(getAtomsData, atom, (trackerName, param) => {
-			set(getAtomsData().atoms[trackerName], (prev) => {
+		updateAtomTracker(spring, atom, (trackerName, param) => {
+			set(spring.getAtom(trackerName), (prev) => {
 				const indx = prev.indexOf(param);
 				return ~indx ? [...prev.slice(0, indx), ...prev.slice(indx + 1)] : prev;
 			});
@@ -22,7 +22,7 @@ const getFamilyTrackerSetters = ({ get, set, reset, getAtomsData }) => {
 	};
 
 	const resetFamily = (atomFamily) => {
-		const trackerAtom = getTrackerForAtom(atomFamily, getAtomsData),
+		const trackerAtom = spring.getTrackerAtom(atomFamily),
 		 tracker = get(trackerAtom);
 
 		tracker.forEach((index) => reset(atomFamily(index)));

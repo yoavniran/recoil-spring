@@ -4,24 +4,22 @@ import { getTrackerAtomName } from "../family";
 import { getAtomFamilyRootName } from "../utils";
 import { useSpring } from "../context";
 
-const getIsMergeableNode = (node, include, getAtomsData) => {
-	let isMergeable = include.includes(node);
+const getIsMergableNode = (node, include, spring) => {
+	let isMergable = include.includes(node);
 
-	if (!isMergeable) {
+	if (!isMergable) {
 		//check if tracker was included for an atomFamily
-		const { atoms } = getAtomsData(),
-			//TODO: skip if node is already the tracker
-			//TODO: skip RecoilValueReadOnly (selector)
-			trackerName = getTrackerAtomName(getAtomFamilyRootName(node)),
-			trackerAtom = atoms[trackerName];
 
-		isMergeable = !!trackerAtom && include.includes(trackerAtom);
+		//TODO: skip if node is already the tracker
+		//TODO: skip RecoilValueReadOnly (selector)
+		const trackerAtom = spring.getTrackerAtom(node);
+		isMergable = !!trackerAtom && include.includes(trackerAtom);
 	}
 
-	return isMergeable;
+	return isMergable;
 };
 
-const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, merge, getAtomsData }) => {
+const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, merge, spring }) => {
 	const targetSnapshot = merge ? currentSnapshot : nextSnapshot;
 
 	return (!merge && !mutator) ?
@@ -31,7 +29,7 @@ const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, me
 				const changedNodesItr = currentSnapshot.getNodes_UNSTABLE();
 
 				for (let node of changedNodesItr) {
-					if (getIsMergeableNode(node, include, getAtomsData)) {
+					if (getIsMergableNode(node, include, spring)) {
 						//merge the value from the target snapshot
 						mutable.set(node, nextSnapshot.getLoadable(node).contents);
 					}
@@ -44,10 +42,10 @@ const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, me
 };
 
 const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true }) => {
-	const { getAtomsData } = useSpring() || {};
+	const spring = useSpring() || {};
 
-	if (!getAtomsData) {
-		throw new Error("recoil:spring - couldn't find Atoms Data from Context for State Time Travel");
+	if (!spring) {
+		throw new Error("recoil:spring - couldn't find Spring instance from Context for State Time Travel");
 	}
 
 	const [previous, setPrevious] = useState([]);
@@ -95,13 +93,12 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 
 			const targetSnapshot = getTargetSnapshot(current, snapshot, {
 				include,
-				getAtomsData,
+				spring,
 				navMutator,
 				merge,
 			});
 
 			retainSnapshot(targetSnapshot);
-
 			setCurrent(targetSnapshot);
 			gotoSnapshot(targetSnapshot);
 		}

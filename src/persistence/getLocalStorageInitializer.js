@@ -1,6 +1,7 @@
 const getLocalStorageInitializer = ({
 	                                    key,
-	                                    customInitializer,
+	                                    customInitializer = null,
+	                                    onErrorHandler = null,
                                     }) => {
 	return ({ set, spring }) => {
 		let data;
@@ -12,23 +13,24 @@ const getLocalStorageInitializer = ({
 				data = JSON.parse(dataStr);
 			}
 		} catch (ex) {
-			console.warn("recoil:spring - FAILED TO READ DATA FROM LS", ex);
+			data = onErrorHandler?.(ex);
 		}
 
 		if (data) {
-			const { atoms, metadata } = spring.getAtomsData();
-
 			Object.entries(data)
 				.forEach(([key, value]) => {
-					if (atoms[key]) {
-						if (metadata[key].isFamily) {
+					const atom = spring.getAtom(key),
+						metadata = spring.getMetadata(key);
+
+					if (atom) {
+						if (metadata.isFamily) {
 							//set atom family members correctly
 							Object.entries(value)
 								.forEach(([param, member]) => {
-									set(atoms[key](param), member);
+									set(atom(param), member);
 								});
 						} else {
-							set(atoms[key], value);
+							set(atom, value);
 						}
 					}
 				});

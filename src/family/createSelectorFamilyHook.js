@@ -1,6 +1,6 @@
-import { getAtomFamilyRootName, isEmpty, isString, isFunction } from "../utils";
 import { isRecoilValue, selectorFamily, useRecoilCallback, useRecoilValue } from "recoil";
 import { DUMMY_RECOIL_SPRING_ATOM } from "../consts";
+import { getAtomFamilyRootName, isEmpty, isString, isFunction } from "../utils";
 import getFamilyTrackerSetters from "./getFamilyTrackerSetters";
 
 // TODO: CANT SUPPORT ATOM KEYS WITH DOUBLE __ because recoil uses this as separator! (What does recoil do if you use it?)
@@ -14,10 +14,10 @@ const createSelector = ({ key, allowWrite, getter, setter, isGetterRecoilVal, se
 		key,
 		set: allowWrite ?
 			(param) => ({ get, set, reset }, newValue) => {
-				const { getAtomsData } = get(DUMMY_RECOIL_SPRING_ATOM);
+				const spring = get(DUMMY_RECOIL_SPRING_ATOM);
 
 				const trackerSetters = getFamilyTrackerSetters({
-					get, set, reset, getAtomsData,
+					get, set, reset, spring,
 				});
 
 				return setter ?

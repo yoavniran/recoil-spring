@@ -24,10 +24,6 @@ const PhotosContainer = styled.div`
   gap: 10px;
 `;
 
-//TODO: make photos list virtual?
-//tODO: make photos list sortable?
-//TODO: support drag/paste of cloudinary res URL????
-
 const StyledIconButtonMenu = styled(IconButtonMenu)`
 	position: absolute;
 	right: 2px;

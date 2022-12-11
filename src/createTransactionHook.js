@@ -1,22 +1,26 @@
 import { useRecoilTransaction_UNSTABLE as useRecoilTransaction } from "recoil";
 import { useSpring } from "./context";
-import { getFamilyTrackerSetters } from "./family";
+import { getFamilyTrackerSetters, getTracker } from "./family";
 
 const createTransactionHook = (setter) =>
 	(deps = []) => {
-		const { getAtomsData } = useSpring() || {};
+		const spring = useSpring() || {};
 
-		if (!getAtomsData) {
-			throw new Error("recoil:spring - couldn't find Atoms Data from Context for Transaction Hook");
+		if (!spring) {
+			throw new Error("recoil:spring - couldn't find Spring instance from Context for Transaction Hook");
 		}
 
 		return useRecoilTransaction((actions) =>
 			(...args) => {
 				const trackerSetters = getFamilyTrackerSetters({
-					...actions, getAtomsData,
+					...actions, spring,
 				});
 
-				setter({ ...actions, ...trackerSetters }, ...args);
+				setter({
+					...actions,
+					...trackerSetters,
+					getTracker: (atomFamily) => getTracker(actions.get, atomFamily),
+				}, ...args);
 			}, deps);
 	};
 
