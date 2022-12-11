@@ -17,7 +17,7 @@ const createTrackerAtom = (name) => {
 	//for family create a tracker atom
 	const trackerAtom = atom({ key: trackerName, default: [] });
 
-	return { name: trackerName, atom: trackerAtom }
+	return { name: trackerName, atom: trackerAtom };
 };
 
 const findTrackerNameInStore = (name, spring) => {

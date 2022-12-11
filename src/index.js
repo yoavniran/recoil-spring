@@ -8,17 +8,16 @@ export createTransactionHook from "./createTransactionHook";
 export {
 	useLocalStoragePersistence,
 	getLocalStorageInitializer,
-} from "./persistence"
+} from "./persistence";
 
 export {
 	useStateTimeTravel,
-	useStateHistory
+	useStateHistory,
 } from "./history";
 
 export {
 	createSelectorFamilyHook,
 	createFamilyTrackerSelectorHook,
-	// getTrackerForAtom,
 } from "./family";
 
 export * from "./springTypes";

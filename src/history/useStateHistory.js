@@ -3,8 +3,6 @@ import {
 	isRecoilValue,
 	useRecoilTransactionObserver_UNSTABLE as useRecoilTransactionObserver,
 } from "recoil";
-import { findTrackerNameInStore } from "../family";
-import { getAtomFamilyRootName } from "../utils";
 import useStateTimeTravel from "./useStateTimeTravel";
 import { useSpring } from "../context";
 
@@ -39,7 +37,7 @@ const getHistoryAtoms = (include, spring) => {
 };
 
 const useStateHistory = ({ include, maxItems = DEFAULT_MAX_ITEMS, navMutator = null }) => {
-	const spring = useSpring() || {};
+	const spring = useSpring();
 
 	if (!spring) {
 		throw new Error("recoil:spring - couldn't find Spring instance from Context for State History");

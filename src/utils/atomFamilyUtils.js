@@ -20,4 +20,4 @@ export {
 	getAtomFamilyParam,
 	getAtomFamilyRootName,
 	getAtomFamilyParts,
-}
+};

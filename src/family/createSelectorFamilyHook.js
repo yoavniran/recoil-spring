@@ -63,20 +63,22 @@ const createSelectorFamilyHook = (key, getter, setter, selectorParams = {}) => {
 		selectorParams,
 	});
 
-	const useHook = (hookParam) =>
-		!allowWrite ?
-			//read only
-			useRecoilValue(selector(hookParam)) :
-			//use callback to be able to return [value, setter] tuple
-			useRecoilCallback(({ set }) => (autoParam) => {
-				return [
-					!isEmpty(autoParam) && useRecoilValue(selector(autoParam)),
-					(...args) => {
-						const param = autoParam || args[0];
-						set(selector(param), args.length === 1 ? args[0] : args[1]);
-					},
-				];
-			}, [])(hookParam);
+	const useHook =
+		//read only
+		!allowWrite ? (hookParam) =>
+				useRecoilValue(selector(hookParam)) :
+			(hookParam) =>
+				//use callback to be able to return [value, setter] tuple
+				useRecoilCallback(({ set }) => (autoParam) => {
+					return [
+						//TODO: need to test this !!!!!!
+						!isEmpty(autoParam) && useRecoilValue(selector(autoParam)),
+						(...args) => {
+							const param = autoParam || args[0];
+							set(selector(param), args.length === 1 ? args[0] : args[1]);
+						},
+					];
+				}, [])(hookParam);
 
 	useHook.selector = selector;
 

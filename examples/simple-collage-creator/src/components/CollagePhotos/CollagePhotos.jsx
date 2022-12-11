@@ -7,6 +7,7 @@ import EmptyCard from "./EmptyCard";
 import UploadingCard from "./UploadingCard";
 import UploadPhotoCard from "./UploadPhotoCard";
 import { usePhotos, usePhotosDrawerHeight } from "../../state/selectors";
+import { useFillSlots } from "../../state/setters";
 import IconButtonMenu from "../IconButtonMenu";
 
 const MIN_CONTAINER_HEIGHT = 14;
@@ -35,10 +36,10 @@ const StyledIconButtonMenu = styled(IconButtonMenu)`
 const CollagePhotos = () => {
 	const photos = usePhotos();
 	const [drawerHeight, setDrawerHeight] = usePhotosDrawerHeight();
-	// const fillCells = useFillGridPhotos();
+	const fillSlots = useFillSlots();
 
-	const onFillCells = () => {
-		// fillCells(damConfig);
+	const onUsePhotos = () => {
+		fillSlots();
 	};
 
 	return (
@@ -57,8 +58,8 @@ const CollagePhotos = () => {
 					<UploadPhotoCard key={photoId} id={photoId}/>)}
 			</PhotosContainer>
 			<StyledIconButtonMenu>
-				<MenuItem onClick={onFillCells} disabled={!photos.length}>
-					<BurstModeIcon /> Fill Cells
+				<MenuItem onClick={onUsePhotos} disabled={!photos.length}>
+					<BurstModeIcon /> Use Photos
 				</MenuItem>
 			</StyledIconButtonMenu>
 		</StyledResizableBottomContainer>

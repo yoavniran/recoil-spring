@@ -38,7 +38,7 @@ const getFamilyContent = (key, trackerIds, snapshot, spring) => {
 };
 
 const useLocalStoragePersistence = ({ key, ignore }) => {
-	const spring = useSpring() || {};
+	const spring = useSpring();
 
 	if (!spring) {
 		throw new Error("recoil:spring - couldn't find Spring instance from Context for LocalStorage Persistence");

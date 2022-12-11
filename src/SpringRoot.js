@@ -12,6 +12,7 @@ const SpringRoot = ({
 
 	return (
 		<RecoilRoot
+			// eslint-disable-next-line react/jsx-no-bind
 			initializeState={({ set }) => initializer({ set, spring: springUsed })}
 			{...recoilProps}
 		>

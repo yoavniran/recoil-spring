@@ -42,12 +42,7 @@ const atoms = spring.atoms;
 
 export default atoms;
 
-console.log("ATOMS !!!! ", atoms);
-console.log("ATOMS KEYS ", Object.keys(atoms));
-
-delete atoms.collageSize;
-
-spring.add("test111", null);
+console.log("Collage Store Atoms --------- ", atoms);
 
 export {
 	DEFAULTS,

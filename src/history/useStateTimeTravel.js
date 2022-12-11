@@ -1,7 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useGotoRecoilSnapshot } from "recoil";
-import { getTrackerAtomName } from "../family";
-import { getAtomFamilyRootName } from "../utils";
 import { useSpring } from "../context";
 
 const getIsMergableNode = (node, include, spring) => {
@@ -24,6 +22,7 @@ const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, me
 
 	return (!merge && !mutator) ?
 		targetSnapshot :
+		// eslint-disable-next-line array-callback-return
 		targetSnapshot.map((mutable) => {
 			if (merge) {
 				const changedNodesItr = currentSnapshot.getNodes_UNSTABLE();
@@ -42,7 +41,7 @@ const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, me
 };
 
 const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true }) => {
-	const spring = useSpring() || {};
+	const spring = useSpring();
 
 	if (!spring) {
 		throw new Error("recoil:spring - couldn't find Spring instance from Context for State Time Travel");
@@ -102,7 +101,7 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 			setCurrent(targetSnapshot);
 			gotoSnapshot(targetSnapshot);
 		}
-	}, [previous, next, current]);
+	}, [previous, next, current, include, merge, navMutator, spring, gotoSnapshot]);
 
 	const addHistory = (prevSnap, nextSnap) => {
 		//store the previous snapshot in the history
