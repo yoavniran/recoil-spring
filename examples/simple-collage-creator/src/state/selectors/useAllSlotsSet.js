@@ -8,7 +8,7 @@ const {
 
 const useAllSlotsSet = createSelectorHook(
 	"useAllSlotsSetSelector",
-	(get, getTracker) => {
+	(get, getCallback, getTracker) => {
 		const photos = getTracker(collagePhotos),
 			size = get(collageSize);
 

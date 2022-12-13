@@ -15,7 +15,8 @@
   "scripts": {
     "clean": "rimraf lib",
     "lint": "eslint ./src --cache",
-    "mocha": "NODE_ENV=test mocha"
+    "mocha": "NODE_ENV=test mocha",
+    "types": "tsc --project tsconfig.json --noEmit"
   },
   "peerDependencies": {
     "recoil": ">=0.7.6"

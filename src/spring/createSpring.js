@@ -48,8 +48,8 @@ const addRecord = (registry, name, defaultValue) => {
 	return registry;
 };
 
-const createSpring = (list = {}) => {
-	const atomsData = Object.entries(list || {})
+const createSpring = (defaults = {}) => {
+	const atomsData = Object.entries(defaults || {})
 		.reduce((res, [name, defaultValue]) =>
 				addRecord(res, name, defaultValue),
 			{ metadata: {}, atoms: {} });

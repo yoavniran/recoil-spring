@@ -25,11 +25,11 @@ const createSelector = (getter, setter = null, key = null, selectorParams = {}) 
 					//set the new value to the atom
 					set(getter, newValue) :
 			undefined,
-		get: ({ get }) => isGetterRecoilVal ?
+		get: ({ get, getCallback }) => isGetterRecoilVal ?
 			//get atom directly
 			get(getter) :
 			//execute getter callback
-			getter(get, (atomFamily) => getTracker(get, atomFamily)),
+			getter(get, getCallback, (atomFamily) => getTracker(get, atomFamily)),
 		...selectorParams,
 	});
 
