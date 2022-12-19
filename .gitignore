@@ -31,3 +31,5 @@ cypress/examples
 cypress/results/
 
 tstest/
+
+lib/

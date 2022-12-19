@@ -4,11 +4,7 @@ import { getFamilyTrackerSetters, getTracker } from "./family";
 
 const createTransactionHook = (setter) =>
 	(deps = []) => {
-		const spring = useSpring();
-
-		if (!spring) {
-			throw new Error("recoil:spring - couldn't find Spring instance from Context for Transaction Hook");
-		}
+		const spring = useSpring("Transaction Hook");
 
 		return useRecoilTransaction((actions) =>
 			(...args) => {

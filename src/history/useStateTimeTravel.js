@@ -41,12 +41,7 @@ const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, me
 };
 
 const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true }) => {
-	const spring = useSpring();
-
-	if (!spring) {
-		throw new Error("recoil:spring - couldn't find Spring instance from Context for State Time Travel");
-	}
-
+	const spring = useSpring("State Time Travel");
 	const [previous, setPrevious] = useState([]);
 	const [next, setNext] = useState([]);
 	const [current, setCurrent] = useState(null);

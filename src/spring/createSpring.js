@@ -56,8 +56,6 @@ const createSpring = (defaults = {}) => {
 
 	const getAtomsData = () => atomsData;
 
-	const getAtomsList = () => Object.values(getAtomsData().atoms);
-
 	const getAtomsEntries = () => Object.entries(getAtomsData().atoms);
 
 	//TODO: accept both string and atom
@@ -97,7 +95,6 @@ const createSpring = (defaults = {}) => {
 
 	//Spring atom only consists of functions, which Recoil won't freeze
 	const spring = {
-		getAtomsList,
 		getAtomsEntries,
 		getAtom,
 		getTrackerAtom,

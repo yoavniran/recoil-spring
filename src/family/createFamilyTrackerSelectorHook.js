@@ -1,6 +1,6 @@
 import { selector, useRecoilValue } from "recoil";
 import { DUMMY_RECOIL_SPRING_ATOM } from "../consts";
-import { getAtomFamilyRootName, isString } from "../utils";
+import { getAtomFamilyRootName, invariant, isString } from "../utils";
 import { TRACKER_EXT } from "./familyTrackerAtom";
 
 const createFamilyTrackerSelectorHook = (key, family, customGetter = null, selectorParams) => {
@@ -21,9 +21,7 @@ const createFamilyTrackerSelectorHook = (key, family, customGetter = null, selec
 			const spring = get(DUMMY_RECOIL_SPRING_ATOM),
 				trackerAtom = spring.getTrackerAtom(family);
 
-			if (!trackerAtom) {
-				throw new Error(`recoil:spring - Failed to find tracker for ${familyRoot} atomFamily`);
-			}
+			invariant(trackerAtom, `recoil:spring - Failed to find tracker for ${familyRoot} atomFamily`);
 
 			const trackerData = get(trackerAtom);
 

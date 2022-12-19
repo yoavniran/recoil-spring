@@ -1,5 +1,6 @@
 import { useRecoilTransactionObserver_UNSTABLE as useRecoilTransactionObserver } from "recoil";
 import { useSpring } from "../context";
+import { warn } from "../utils";
 
 //TODO: support include list (not just ignore)
 
@@ -38,11 +39,7 @@ const getFamilyContent = (key, trackerIds, snapshot, spring) => {
 };
 
 const useLocalStoragePersistence = ({ key, ignore }) => {
-	const spring = useSpring();
-
-	if (!spring) {
-		throw new Error("recoil:spring - couldn't find Spring instance from Context for LocalStorage Persistence");
-	}
+	const spring = useSpring("LocalStorage Persistence");
 
 	useRecoilTransactionObserver(({ snapshot, previousSnapshot }) => {
 		let hasChangesFromPrevious = false;
@@ -76,8 +73,7 @@ const useLocalStoragePersistence = ({ key, ignore }) => {
 			try {
 				localStorage.setItem(key, JSON.stringify(data));
 			} catch (ex) {
-				//TODO: replace with invariant/warning pkg
-				console.warn("FAILED TO PERSIST RECOIL DATA TO LS", ex);
+				warn("FAILED TO PERSIST RECOIL DATA TO LS", ex);
 			}
 		}
 	});

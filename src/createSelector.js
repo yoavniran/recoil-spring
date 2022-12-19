@@ -1,19 +1,15 @@
 import { selector, isRecoilValue } from "recoil";
+import { invariant } from "./utils";
 import { getTracker } from "./family";
 
 const createSelector = (getter, setter = null, key = null, selectorParams = {}) => {
-	if (!getter && !setter) {
-		throw new Error("recoil:spring - can't create a selector without neither a getter or a setter");
-	}
+	invariant(getter, setter, "recoil:spring - can't create a selector without neither a getter or a setter");
 
 	const isGetterRecoilVal = isRecoilValue(getter),
 		allowWrite = setter !== false && (setter || (!setter && isGetterRecoilVal));
 
-	const usedKey = key || (isGetterRecoilVal && (getter.key + "SpringSelector") );
-
-	if (!usedKey) {
-		throw new Error("recoil:spring - Selector key not provided and could not be generated");
-	}
+	const usedKey = key || (isGetterRecoilVal && (getter.key + "SpringSelector"));
+	invariant(usedKey, "recoil:spring - Selector key not provided and could not be generated");
 
 	const hookSelector = selector({
 		key: usedKey,

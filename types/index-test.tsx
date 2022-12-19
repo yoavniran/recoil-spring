@@ -3,7 +3,7 @@ import { GetRecoilValue, RecoilState, selector, useRecoilState, useRecoilValue }
 import {
 	createSpring,
 	createSelectorHook,
-	SelectorSetterActions, createSelectorHookWithKey,
+	SelectorSetterActions, createSelectorHookWithKey, createSetterHook,
 } from "./index";
 
 //store
@@ -17,6 +17,7 @@ interface MyAtoms {
 	size: RecoilState<number>;
 	color: RecoilState<string>;
 	photos: (param: string) => RecoilState<Photo>;
+	test: RecoilState<number>;
 }
 
 const spring = createSpring<MyAtoms>({
@@ -24,6 +25,10 @@ const spring = createSpring<MyAtoms>({
 	color: "#000",
 	photos: null,
 });
+
+spring
+	.add("more", 123)
+	.addFamily("uploads", null);
 
 //--------------------------------------------------
 //selectors
@@ -60,6 +65,14 @@ const useReadOnlyColor = createSelectorHookWithKey<string, false>(
 	false
 );
 
+//setters
+
+const useTestSetter = createSetterHook(({ get, set }, extender: number) => {
+	const size = get(spring.atoms.size);
+	set(spring.atoms.test, (prev) => prev + size * extender);
+});
+
+
 //--------------------------------------------------
 //components
 
@@ -67,8 +80,10 @@ const App = (): JSX.Element => {
 	const [ color, setColor ] = useAppColor();
 	const computed = useRecoilValue(testSelector);
 	const roColor = useReadOnlyColor();
+	const extendTest = useTestSetter();
 
 	const onChangeColor = () => {
+		extendTest(3);
 		setColor("#FFF");
 	};
 

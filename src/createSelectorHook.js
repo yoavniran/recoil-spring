@@ -12,9 +12,9 @@ const createSelectorHook = (key, getter, setter = null, selectorParams = {}) => 
 
 	const { allowWrite, hookSelector } = createSelector(getter, setter, key, selectorParams);
 
-	const useHook = () => allowWrite ?
-		useRecoilState(hookSelector) :
-		useRecoilValue(hookSelector);
+	const useHook = allowWrite ? () =>
+			useRecoilState(hookSelector) :
+		() => useRecoilValue(hookSelector);
 
 	useHook.selector = hookSelector;
 

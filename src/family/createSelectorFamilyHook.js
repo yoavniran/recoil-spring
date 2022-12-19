@@ -1,6 +1,6 @@
 import { isRecoilValue, selectorFamily, useRecoilCallback, useRecoilValue } from "recoil";
 import { DUMMY_RECOIL_SPRING_ATOM } from "../consts";
-import { getAtomFamilyRootName, isEmpty, isString, isFunction } from "../utils";
+import { getAtomFamilyRootName, isEmpty, isString, isFunction, invariant } from "../utils";
 import getFamilyTrackerSetters from "./getFamilyTrackerSetters";
 
 // TODO: CANT SUPPORT ATOM KEYS WITH DOUBLE __ because recoil uses this as separator! (What does recoil do if you use it?)
@@ -50,9 +50,7 @@ const createSelectorFamilyHook = (key, getter, setter, selectorParams = {}) => {
 		familyRoot = isFunction(getter) && getAtomFamilyRootName(getter),
 		usedKey = key || (familyRoot && (familyRoot + "SpringFamilySelector"));
 
-	if (!usedKey) {
-		throw new Error("recoil:spring - Family Selector key not provided and could not be generated");
-	}
+	invariant(usedKey, "recoil:spring - Family Selector key not provided and could not be generated");
 
 	const selector = createSelector({
 		key: usedKey,

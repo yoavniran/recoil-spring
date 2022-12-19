@@ -40,3 +40,10 @@ export type SelectorGetter<T> = (get: GetRecoilValue, getCallback: GetCallback, 
 
 export type SelectorParams = Pick<ReadOnlySelectorOptions<any>, "dangerouslyAllowMutability" | "cachePolicy_UNSTABLE">;
 
+export type AtomMetadata = {
+	name: string;
+	fullName: string;
+	isFamily: boolean;
+	isTracker: boolean;
+	tracked: string;
+};

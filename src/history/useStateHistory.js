@@ -5,6 +5,7 @@ import {
 } from "recoil";
 import useStateTimeTravel from "./useStateTimeTravel";
 import { useSpring } from "../context";
+import { invariant } from "../utils";
 
 const DEFAULT_MAX_ITEMS = 10;
 
@@ -16,11 +17,7 @@ const getAtomsForDiff = (include, spring) => {
 const getHasDiffs = (snapshot, prevSnapshot, atoms) => {
 	return (!prevSnapshot && snapshot) ||
 		!!atoms.find((a) => {
-			const res = snapshot.getLoadable(a).contents !== prevSnapshot.getLoadable(a).contents;
-			if (res) {
-				console.log("FOUND SNAPSHOT DIFF FOR HISTORY ", a);
-			}
-			return res;
+			return snapshot.getLoadable(a).contents !== prevSnapshot.getLoadable(a).contents;
 		});
 };
 
@@ -29,19 +26,13 @@ const getHistoryAtoms = (include, spring) => {
 	const usedInclude = include ? include : spring.getAtomsList();
 	const undefIndx = usedInclude.findIndex((a) => !a);
 
-	if (~undefIndx) {
-		throw new Error(`recoil:spring - State History received undefined as part of 'include' list! (index = ${undefIndx}`);
-	}
+	invariant(!~undefIndx, `recoil:spring - State History received undefined as part of 'include' list! (index = ${undefIndx}`);
 
 	return usedInclude;
 };
 
 const useStateHistory = ({ include, maxItems = DEFAULT_MAX_ITEMS, navMutator = null }) => {
-	const spring = useSpring();
-
-	if (!spring) {
-		throw new Error("recoil:spring - couldn't find Spring instance from Context for State History");
-	}
+	const spring = useSpring("State History");
 
 	const usedInclude = getHistoryAtoms(include, spring);
 	const diffAtoms = getAtomsForDiff(usedInclude, spring);
