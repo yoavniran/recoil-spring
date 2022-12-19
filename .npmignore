@@ -36,3 +36,5 @@ test-setup.js
 codecov
 codecov.yml
 .mocharc.js
+
+.release-it.json

@@ -19,7 +19,10 @@
     "lint": "eslint ./src --cache",
     "lint:nocache": "eslint ./src",
     "mocha": "NODE_ENV=test mocha",
-    "types": "tsc --project tsconfig.json --noEmit"
+    "types": "tsc --project tsconfig.json --noEmit",
+    "release": "release-it --verbose",
+    "release:same": "yarn release --no-increment",
+    "release:rc": "yarn release --preRelease=rc"
   },
   "peerDependencies": {
     "recoil": ">=0.7.6"
@@ -59,6 +62,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recoil": "^0.7.6",
+    "release-it": "^15.5.1",
     "rollup": "^3.7.4",
     "sinon": "^15.0.0",
     "typescript": "^4.9.4"
