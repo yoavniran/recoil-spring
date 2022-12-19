@@ -1,5 +1,6 @@
 module.exports = {
   "git": {
+	  "requireBranch": "release",
     "commitMessage": "chore: release v${version}"
   },
   "github": {
