@@ -38,3 +38,5 @@ codecov.yml
 .mocharc.js
 
 .release-it.json
+
+examples/
