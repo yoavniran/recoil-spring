@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "example of recoil-spring in a collage creator app",
   "main": "index.js",
+  "private": true,
   "repository": "https://github.com/yoavniran/recoil-spring",
   "author": "yoav niran",
   "license": "MIT",
