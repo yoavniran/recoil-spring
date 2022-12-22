@@ -50,6 +50,18 @@ describe("createSpring tests", () => {
 		expect(atoms.uploads).to.be.a("Function");
 	});
 
+	it("should throw on getAtom for not found", () => {
+		const { atoms } = createSpring({
+			test: 1
+		}) ;
+
+		expect(isRecoilValue(atoms.test)).to.be.true;
+
+		expect(() => {
+			const a = atoms.foo;
+		}).to.throw("'foo' atom not found!");
+	});
+
 	describe("readonly atoms map tests", () => {
 		it("should be possible to list atoms in map", () => {
 			const spring = createSpring({

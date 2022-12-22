@@ -2,6 +2,7 @@ import { atom as createAtom, atomFamily as creatAtomFamily } from "recoil";
 import { RECOIL_SPRING_ATOM_KEY } from "../consts";
 import { createTrackerAtom, getTrackerForAtom } from "../family";
 import { springFamily } from "../springTypes";
+import { invariant } from "../utils";
 
 const createRecord = (name, defaultValue) => {
 	const isFamily = name.endsWith("*"),
@@ -68,7 +69,7 @@ const createSpring = (defaults = {}) => {
 	const getMetadata = (name) => {
 		const md = getAtomsData().metadata[name];
 		//create a copy
-		return md && { ...md };
+		return { ...md };
 	};
 
 	const add = (name, defaultValue) => {
@@ -83,7 +84,12 @@ const createSpring = (defaults = {}) => {
 
 	//create read-only atoms-map for userland's store
 	const atoms = new Proxy({}, {
-		get: (_, name) => getAtom(name),
+		get: (_, name) => {
+			const atom = getAtom(name);
+			//throw so its less likely to pass an undefined atom to a selector
+			invariant(atom, `recoil:spring - '${name}' atom not found!`);
+			return atom;
+		},
 		ownKeys: () => Object.keys(getAtomsData().atoms),
 		getOwnPropertyDescriptor: (target, p) => ({
 			configurable: true,
