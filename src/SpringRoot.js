@@ -1,3 +1,4 @@
+import React from "react";
 import { RecoilRoot } from "recoil";
 import { isFunction } from "./utils";
 import SpringContext from "./context";

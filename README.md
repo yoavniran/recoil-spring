@@ -3,7 +3,7 @@
 ![Recoil:Spring Logo](#gh-dark-mode-only)
 ![Recoil:Spring Logo](#gh-light-mode-only)
 
-<p align="center">Jumpstart Recoil: less boilerplate, more code.</p>
+<p align="center">Jumpstart Recoil - less boilerplate, more fun.</p>
 
 <details>
     <summary>Contents</summary>
@@ -16,6 +16,11 @@
 </details>
 
 ## Intro
+
+Think React Toolkit or MobX State Tree but for Recoil. Opinionated but not too much :) 
+
+
+
 
 
 ## Documentation

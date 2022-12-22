@@ -12,7 +12,7 @@ const createFamilyTrackerSelectorHook = (key, family, customGetter = null, selec
 	}
 
 	const familyRoot = getAtomFamilyRootName(family);
-
+	invariant(familyRoot, `recoil:spring - Failed to find root name for atomFamily`);
 	const usedKey = key || familyRoot + TRACKER_EXT + "Selector";
 
 	const hookSelector = selector({
