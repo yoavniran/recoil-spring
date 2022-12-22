@@ -50,7 +50,7 @@ describe("createSpring tests", () => {
 		expect(atoms.uploads).to.be.a("Function");
 	});
 
-	it("should throw on getAtom for not found", () => {
+	it("should throw on access to non-existing atom in map", () => {
 		const { atoms } = createSpring({
 			test: 1
 		}) ;
@@ -97,11 +97,9 @@ describe("createSpring tests", () => {
 
 		it("should be available in map after add call", () => {
 			const spring = createSpring();
-
-			expect(isRecoilValue(spring.atoms.test)).to.be.false;
+			expect(isRecoilValue(spring.getAtom("test"))).to.be.false;
 
 			spring.add("test", "123");
-
 			expect(isRecoilValue(spring.atoms.test)).to.be.true;
 		});
 	});
