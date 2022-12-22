@@ -6,5 +6,8 @@ module.exports = {
   "github": {
     "release": true,
 	  "releaseName": "Version ${version}",
-  }
+  },
+	"hooks": {
+		"before:init": ["yarn mocha", "yarn build"],
+	}
 };

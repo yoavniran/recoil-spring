@@ -10,7 +10,8 @@
     "recoil",
     "state",
     "state management",
-    "react"
+    "react",
+    "hooks"
   ],
   "license": "MIT",
   "scripts": {
