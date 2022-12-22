@@ -3,7 +3,7 @@ import { invariant } from "./utils";
 import { getTracker } from "./family";
 
 const createSelector = (getter, setter = null, key = null, selectorParams = {}) => {
-	invariant(getter, setter, "recoil:spring - can't create a selector without neither a getter or a setter");
+	invariant(getter, setter, "recoil:spring - can't create a selector with neither a getter nor a setter");
 
 	const isGetterRecoilVal = isRecoilValue(getter),
 		allowWrite = setter !== false && (setter || (!setter && isGetterRecoilVal));
