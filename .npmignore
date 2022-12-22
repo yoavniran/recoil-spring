@@ -40,3 +40,5 @@ codecov.yml
 .release-it.json
 
 examples/
+
+docs/
