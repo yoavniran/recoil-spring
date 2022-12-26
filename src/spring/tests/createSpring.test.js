@@ -58,6 +58,7 @@ describe("createSpring tests", () => {
 		expect(isRecoilValue(atoms.test)).to.be.true;
 
 		expect(() => {
+			// eslint-disable-next-line no-unused-vars
 			const a = atoms.foo;
 		}).to.throw("'foo' atom not found!");
 	});
