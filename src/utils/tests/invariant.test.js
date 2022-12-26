@@ -1,4 +1,4 @@
-import { invariant } from "../index";
+import { invariant, invariantAll } from "../index";
 
 describe("invariants tests", () => {
 	it("should not throw for truthy", () => {
@@ -27,7 +27,7 @@ describe("invariants tests", () => {
 
 	it("should not throw when some checks are falsy", () => {
 		expect(() => {
-			invariant(null, "foo", undefined, false);
+			invariant(null, "foo", undefined, false, "test");
 		}).not.to.throw;
 	});
 
@@ -35,5 +35,25 @@ describe("invariants tests", () => {
 		expect(() => {
 			invariant(null, 0, undefined, false, "ya'll are nothing");
 		}).to.throw("ya'll are nothing");
+	});
+
+	describe("invariantAll tests", () => {
+		it("should not throw for all truthy", () => {
+			expect(() => {
+				invariantAll(1, true, "a", "test");
+			}).not.to.throw;
+		});
+
+		it("should throw for some falsy", () => {
+			expect(() => {
+				invariantAll("1", true, false, "all or nothing");
+			}).to.throw("all or nothing");
+		});
+
+		it("should throw all falsy", () => {
+			expect(() => {
+				invariantAll(undefined, "nope");
+			}).to.throw("nope");
+		});
 	});
 });

@@ -5,7 +5,7 @@ module.exports = {
 		"es2020": true,
 		"commonjs": true,
 	},
-	"extends": ["eslint:recommended", "react-app", "plugin:jsx-a11y/recommended"],
+	"extends": ["eslint:recommended", "react-app", "plugin:jsx-a11y/recommended", "plugin:storybook/recommended"],
 	"globals": {
 		"ENV": true,
 	},
@@ -124,8 +124,7 @@ module.exports = {
 	}, {
 		"files": ["*.test.js"],
 		"plugins": ["mocha", "chai-friendly"],
-		"env": {
-		},
+		"env": {},
 		"globals": {
 			"testCustomHook": "readonly",
 			"mount": "readonly",
@@ -144,7 +143,7 @@ module.exports = {
 			"no-async/no-async": 0,
 			"mocha/no-mocha-arrows": 0,
 			"no-unused-expressions": 0,
-			"chai-friendly/no-unused-expressions": 2
+			"chai-friendly/no-unused-expressions": 2,
 		},
 	}],
 };

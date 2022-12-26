@@ -11,10 +11,13 @@ const SpringRoot = ({
                     }) => {
 	const springUsed = isFunction(spring) ? spring() : spring;
 
+	const initState = initializer ?
+		({ set }) => initializer({ set, spring: springUsed }) : undefined;
+
 	return (
 		<RecoilRoot
 			// eslint-disable-next-line react/jsx-no-bind
-			initializeState={({ set }) => initializer({ set, spring: springUsed })}
+			initializeState={initState}
 			{...recoilProps}
 		>
 			<SpringContext.Provider value={springUsed}>

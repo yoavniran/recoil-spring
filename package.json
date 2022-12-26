@@ -19,11 +19,13 @@
     "clean": "rimraf lib",
     "lint": "eslint ./src --cache",
     "lint:nocache": "eslint ./src",
-    "mocha": "NODE_ENV=test mocha",
+    "mocha": "NODE_ENV=test mocha --parallel",
     "types": "tsc --project tsconfig.json --noEmit",
     "release": "release-it --verbose",
     "release:same": "yarn release --no-increment",
-    "release:rc": "yarn release --preRelease=rc"
+    "release:rc": "yarn release --preRelease=rc",
+    "sb": "start-storybook -p 6006",
+    "sbb": "build-storybook"
   },
   "peerDependencies": {
     "recoil": ">=0.7.6"
@@ -39,15 +41,24 @@
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.2.0",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/builder-webpack4": "^6.5.15",
+    "@storybook/manager-webpack4": "^6.5.15",
+    "@storybook/react": "^6.5.15",
+    "@storybook/testing-library": "^0.0.13",
     "@testing-library/cypress": "^8.0.7",
     "@testing-library/react": "^13.4.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.3.0",
     "babel-plugin-istanbul": "^6.1.1",
     "chai": "^4.3.7",
     "concurrently": "^7.6.0",
-    "cypress": "^11.2.0",
+    "cypress": "^12.2.0",
     "eslint": "^8.29.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-import-resolver-webpack": "^0.13.2",
@@ -56,6 +67,9 @@
     "eslint-plugin-mocha": "^10.1.0",
     "eslint-plugin-no-async": "^1.0.1",
     "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-storybook": "^0.6.8",
+    "global-jsdom": "^8.6.0",
+    "jsdom": "^20.0.3",
     "mocha": "^10.1.0",
     "mocha-junit-reporter": "^2.2.0",
     "mocha-multi-reporters": "^1.5.1",
@@ -70,5 +84,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
-  }
+  },
+  "dependencies": {}
 }
