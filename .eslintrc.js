@@ -126,9 +126,8 @@ module.exports = {
 		"plugins": ["mocha", "chai-friendly"],
 		"env": {},
 		"globals": {
-			"testCustomHook": "readonly",
-			"mount": "readonly",
-			"shallow": "readonly",
+			"recoilRenderHook": "readonly",
+			"stubProp": "readonly",
 			"jsdom": "readonly",
 		},
 		"extends": ["plugin:mocha/recommended"],
