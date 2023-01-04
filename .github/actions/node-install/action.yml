@@ -18,7 +18,7 @@ runs:
       
     - name: Output Yarn Cache Dir
       shell: bash
-      run echo "{steps.yarn-cache-dir-path.outputs.dir}"
+      run: echo "{steps.yarn-cache-dir-path.outputs.dir}"
       
     - name: Cache Node Modules
       id: cache-node-modules
