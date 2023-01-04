@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: install
     steps:
+     - name: Checkout branch
+       uses: actions/checkout@v3
      - run: yarn lint    
      
   types:
@@ -34,6 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: install
     steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
       - run: yarn types
     
 #   build-and-test:
