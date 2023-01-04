@@ -1,10 +1,13 @@
 import * as React from "react";
-import { GetRecoilValue, RecoilState, selector, useRecoilState, useRecoilValue } from "recoil";
+import { GetRecoilValue, RecoilState, selector, useRecoilValue } from "recoil";
 import {
 	createSpring,
 	createSelectorHook,
-	SelectorSetterActions, createSelectorHookWithKey, createSetterHook,
+	SelectorSetterActions,
+	createSelectorHookWithKey,
+	createSetterHook, createGetSetHooks,
 } from "./index";
+import { FC } from "react";
 
 //store
 
@@ -56,13 +59,13 @@ const testSelector = selector<ComputedVals>({
 	key: "test test",
 	get: ({ get }) => {
 		return get(useComputedSelector);
-	}
+	},
 });
 
 const useReadOnlyColor = createSelectorHookWithKey<string, false>(
 	"readonlyColorSelector",
 	spring.atoms.color,
-	false
+	false,
 );
 
 //setters
@@ -72,9 +75,31 @@ const useTestSetter = createSetterHook(({ get, set }, extender: number) => {
 	set(spring.atoms.test, (prev) => prev + size * extender);
 });
 
+const {
+	useGetHook: useTestGet,
+	useSetHook: useTestSet,
+} = createGetSetHooks<number>(spring.atoms.test);
 
 //--------------------------------------------------
 //components
+
+const ShowTestValue: FC = () => {
+	const testValue = useTestGet();
+
+	return (<span id="testValue">{testValue}</span>);
+};
+
+const ChangeTestValue = () => {
+	const setValue = useTestSet();
+
+	return (
+		<button
+			id="changeValueButton"
+			onClick={() => setValue((prev) => prev + 1)}>
+			change
+		</button>
+	);
+};
 
 const App = (): JSX.Element => {
 	const [ color, setColor ] = useAppColor();
@@ -93,7 +118,9 @@ const App = (): JSX.Element => {
 			{computed.size}
 			{computed.color}
 			{roColor}
-			<AppOptions />
+			<AppOptions/>
+			<ShowTestValue/>
+			<ChangeTestValue/>
 		</main>
 	);
 };

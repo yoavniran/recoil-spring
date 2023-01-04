@@ -31,17 +31,17 @@ const getHistoryAtoms = (include, spring) => {
 	return usedInclude;
 };
 
-const useStateHistory = ({ include, maxItems = DEFAULT_MAX_ITEMS, navMutator = null }) => {
+const useStateHistory = ({ include, maxItems = DEFAULT_MAX_ITEMS, merge = true, navMutator = null }) => {
 	const spring = useSpring("State History");
-
 	const usedInclude = getHistoryAtoms(include, spring);
 	const diffAtoms = getAtomsForDiff(usedInclude, spring);
 
 	const {
 		doTimeTravel,
 		addHistory,
+		storeLatest,
 		counters,
-	} = useStateTimeTravel({ include: diffAtoms, navMutator, maxItems });
+	} = useStateTimeTravel({ include: diffAtoms, navMutator, maxItems, merge });
 
 	useRecoilTransactionObserver(({ snapshot, previousSnapshot }) => {
 		const id = snapshot.getID();
@@ -49,6 +49,9 @@ const useStateHistory = ({ include, maxItems = DEFAULT_MAX_ITEMS, navMutator = n
 		if (id !== previousSnapshot?.getID()) {
 			if (getHasDiffs(snapshot, previousSnapshot, diffAtoms)) {
 				addHistory(previousSnapshot, snapshot);
+			} else if (merge) {
+				//we need latest for merge, otherwise we wont have the values for atoms we dont track in history
+				storeLatest(snapshot);
 			}
 		}
 	});

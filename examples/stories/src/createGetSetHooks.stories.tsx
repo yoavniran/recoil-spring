@@ -1,18 +1,16 @@
-import { SpringRoot, createSpring, createGetSetHooks } from "../../src";
-
-const spring = createSpring({
-	test: 1,
-});
+import React, { FC } from "react";
+import { SpringRoot, createGetSetHooks } from "recoil-spring";
+import spring, { atoms } from "./spring";
 
 const {
 	useGetHook: simpleGetHook,
 	useSetHook: simpleSetHook,
-} = createGetSetHooks(spring.atoms.test);
+} = createGetSetHooks<number>(atoms.test);
 
-const ShowTestValue = () => {
+const ShowTestValue: FC = () => {
 	const testValue = simpleGetHook();
 
-	return (<span>{testValue}</span>);
+	return (<span id="testValue">{testValue}</span>);
 };
 
 const ChangeTestValue = () => {
@@ -20,14 +18,14 @@ const ChangeTestValue = () => {
 
 	return (
 		<button
+			id="changeValueButton"
 			onClick={() => setValue((prev) => prev + 1)}>
 			change
 		</button>
 	);
 };
 
-export const Simple = () => {
-
+export const Simple: FC = () => {
 	return (
 		<SpringRoot spring={spring}>
 			<div>
