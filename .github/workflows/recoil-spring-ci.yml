@@ -29,6 +29,8 @@ jobs:
     steps:
      - name: Checkout branch
        uses: actions/checkout@v3
+     - name: Install
+       uses: bahmutov/npm-install@v1
      - run: yarn lint    
      
   types:
@@ -38,6 +40,8 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
+      - name: Install
+        uses: bahmutov/npm-install@v1
       - run: yarn types
     
 #   build-and-test:
