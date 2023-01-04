@@ -15,7 +15,7 @@ const createGetSetHooks = (key, getter, setter, selectorParams = {}) => {
 	}
 
 	const isGetterRecoilVal = isRecoilValue(getter),
-	 usedKey = key || (isGetterRecoilVal && (getter.key + "SpringGetSetSelector"));
+		usedKey = key || (isGetterRecoilVal && (getter.key + "SpringGetSetSelector"));
 
 	invariant(usedKey, "recoil:spring - GetSetHooks key not provided and could not be generated");
 
@@ -27,4 +27,11 @@ const createGetSetHooks = (key, getter, setter, selectorParams = {}) => {
 	return { useGetHook, useSetHook };
 };
 
+const createGetSetHooksWithKey = (key, getter, setter = null, selectorParams) =>
+	createGetSetHooks(key, getter, setter, selectorParams);
+
 export default createGetSetHooks;
+
+export {
+	createGetSetHooksWithKey,
+};

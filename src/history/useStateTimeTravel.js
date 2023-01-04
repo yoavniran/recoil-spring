@@ -17,10 +17,10 @@ const getIsMergableNode = (node, include, spring) => {
 	return isMergable;
 };
 
-const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, merge, spring }) => {
-	const targetSnapshot = merge ? currentSnapshot : nextSnapshot;
+const getTargetSnapshot = ({ currentSnapshot, nextSnapshot, latestSnapshot, include, navMutator, merge, spring }) => {
+	const targetSnapshot = merge ? (latestSnapshot || currentSnapshot) : nextSnapshot;
 
-	return (!merge && !mutator) ?
+	return (!merge && !navMutator) ?
 		targetSnapshot :
 		// eslint-disable-next-line array-callback-return
 		targetSnapshot.map((mutable) => {
@@ -36,7 +36,7 @@ const getTargetSnapshot = (currentSnapshot, nextSnapshot, { include, mutator, me
 			}
 
 			//allow mutations of the snapshot before its applied
-			mutator?.(mutable);
+			navMutator?.(mutable);
 		});
 };
 
@@ -45,6 +45,7 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 	const [previous, setPrevious] = useState([]);
 	const [next, setNext] = useState([]);
 	const [current, setCurrent] = useState(null);
+	const [latest, setLatest] = useState(null);
 	const releasers = useRef(new Map());
 	const gotoSnapshot = useGotoRecoilSnapshot();
 
@@ -60,7 +61,9 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 	};
 
 	useEffect(() => {
-		const all = next.concat(previous).concat(current || [])
+		const all = next.concat(previous)
+			.concat(current || [])
+			.concat(latest || [])
 			.map((snap) => snap.getID());
 
 		releasers.current
@@ -71,8 +74,7 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 					releasers.current.delete(id);
 				}
 			});
-
-	}, [next, previous, current]);
+	}, [next, previous, current, latest]);
 
 	const doTimeTravel = useCallback((direction) => {
 		const dirSnapshots = direction < 0 ? previous : next;
@@ -85,7 +87,10 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 			subtract((prev) => prev.slice(1));
 			add((prev) => [current, ...prev]);
 
-			const targetSnapshot = getTargetSnapshot(current, snapshot, {
+			const targetSnapshot = getTargetSnapshot({
+				currentSnapshot: current,
+				nextSnapshot: snapshot,
+				latestSnapshot: latest,
 				include,
 				spring,
 				navMutator,
@@ -112,9 +117,15 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 		setCurrent(nextSnap);
 	};
 
+	const storeLatest = (snapshot) => {
+		retainSnapshot(snapshot);
+		setLatest(snapshot);
+	};
+
 	return {
 		addHistory,
 		doTimeTravel,
+		storeLatest,
 		counters: [previous.length, next.length],
 	};
 };

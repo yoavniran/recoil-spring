@@ -4,6 +4,7 @@
   "description": "Jumpstart Recoil - less boilerplate, more fun.",
   "main": "index.cjs.js",
   "module": "index.es.js",
+  "types": "types/index.d.ts",
   "repository": "https://github.com/yoavniran/recoil-spring",
   "author": "yoav niran",
   "keywords": [
@@ -16,6 +17,7 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn clean; rollup -c --bundleConfigAsCjs",
+    "watch": "yarn build --watch",
     "clean": "rimraf lib",
     "lint": "eslint ./src --cache",
     "lint:nocache": "eslint ./src",
@@ -25,8 +27,8 @@
     "release": "release-it --verbose",
     "release:same": "yarn release --no-increment",
     "release:rc": "yarn release --preRelease=rc",
-    "sb": "start-storybook -p 6006",
-    "sbb": "build-storybook"
+    "cy:open": "CYPRESS_BASE_URL=http://localhost:8050 cypress open --e2e --browser chrome",
+    "cy:comp": " cypress open --component --browser chrome"
   },
   "peerDependencies": {
     "recoil": ">=0.7.6"
@@ -42,14 +44,6 @@
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.2.0",
-    "@storybook/addon-actions": "^6.5.15",
-    "@storybook/addon-essentials": "^6.5.15",
-    "@storybook/addon-interactions": "^6.5.15",
-    "@storybook/addon-links": "^6.5.15",
-    "@storybook/builder-webpack4": "^6.5.15",
-    "@storybook/manager-webpack4": "^6.5.15",
-    "@storybook/react": "^6.5.15",
-    "@storybook/testing-library": "^0.0.13",
     "@testing-library/cypress": "^8.0.7",
     "@testing-library/react": "^13.4.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
