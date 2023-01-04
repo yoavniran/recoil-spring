@@ -101,7 +101,7 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 			setCurrent(targetSnapshot);
 			gotoSnapshot(targetSnapshot);
 		}
-	}, [previous, next, current, include, merge, navMutator, spring, gotoSnapshot]);
+	}, [previous, next, current, latest, include, merge, navMutator, spring, gotoSnapshot]);
 
 	const addHistory = (prevSnap, nextSnap) => {
 		//store the previous snapshot in the history

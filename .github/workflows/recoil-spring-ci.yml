@@ -25,7 +25,7 @@ jobs:
        uses: actions/checkout@v3
      - name: node install
        uses: ../actions/node-install
-     - run: yarn lint
+     - run: yarn lint:nocache
 
   types:
     name: Check TS types
@@ -36,12 +36,6 @@ jobs:
         uses: actions/checkout@v3
       - name: node install
         uses: ../actions/node-install
-#       - uses: actions/setup-node@v3
-#         with:
-#          node-version: 16
-#          cache: "yarn"
-#       - name: Install
-#         uses: bahmutov/npm-install@v1
       - run: yarn types
 
 
