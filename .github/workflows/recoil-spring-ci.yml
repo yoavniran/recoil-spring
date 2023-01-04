@@ -37,3 +37,14 @@ jobs:
       - name: node install
         uses: ./.github/actions/node-install
       - run: yarn types
+
+  mocha:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+      - name: node install
+        uses: ./.github/actions/node-install
+      - run: yarn mocha
