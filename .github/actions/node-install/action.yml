@@ -8,10 +8,11 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: 16
-        cache: "yarn"   
+       # cache: "yarn"   
         
     - name: Yarn cache directory path
       id: yarn-cache-dir-path
+      shell: bash
       run: echo "::set-output name=dir::$(yarn cache dir)"     
         
     - name: Cache Node Modules
