@@ -19,6 +19,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: "yarn"
       - name: Install
         uses: bahmutov/npm-install@v1
 
@@ -29,6 +30,10 @@ jobs:
     steps:
      - name: Checkout branch
        uses: actions/checkout@v3
+     - uses: actions/setup-node@v3
+       with:
+         node-version: 16
+         cache: "yarn"   
      - name: Install
        uses: bahmutov/npm-install@v1
      - run: yarn lint    
@@ -40,6 +45,10 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+         node-version: 16
+         cache: "yarn"         
       - name: Install
         uses: bahmutov/npm-install@v1
       - run: yarn types
