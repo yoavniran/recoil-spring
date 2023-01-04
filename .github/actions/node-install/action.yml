@@ -13,12 +13,12 @@ runs:
     - name: Yarn cache directory path
       id: yarn-cache-dir-path
       shell: bash
-      run: echo "{dir}={yarn cache dir}" >> $GITHUB_OUTPUT
+      run: echo "{dir}=${yarn cache dir}" >> $GITHUB_OUTPUT
       #echo "::set-output name=dir::$(yarn cache dir)"     
       
     - name: Output Yarn Cache Dir
       shell: bash
-      run: echo "{steps.yarn-cache-dir-path.outputs.dir}"
+      run: echo "${{ steps.yarn-cache-dir-path.outputs.dir }}"
       
     - name: Cache Node Modules
       id: cache-node-modules
