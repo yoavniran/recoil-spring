@@ -23,7 +23,6 @@
     "lint:nocache": "eslint ./src",
     "mocha": "NODE_ENV=test mocha --parallel",
     "ts:test": "dtslint types; tsc --project tsconfig.json --noEmit",
-    "ts:gen-": "tsc --project tsconfig.json --declaration --emitDeclarationOnly --outFile lib/index.d.ts",
     "ts:gen": "node scripts/defgen.js --in types/index.d.ts --out lib/ts/index.d.ts",
     "test": "yarn lint; yarn mocha",
     "release": "release-it --verbose",
