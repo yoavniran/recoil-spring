@@ -21,7 +21,7 @@ const compilerOptions = {
 };
 
 const getFileContents = (file) => {
-	let code = `\n// -------- ${path.basename(file.path)}`;
+	let code = `\n\n// -- ${path.basename(file.path)}`;
 	const extImports = [];
 
 	const readNode = (node) => {
@@ -138,7 +138,7 @@ const generate = async () => {
 	const index = program.getSourceFile(ROOT_DEF);
 
 	if (!fs.existsSync(OUT_DIR)) {
-		fs.mkdirSync(OUT_DIR);
+		fs.mkdirSync(OUT_DIR, { recursive: true });
 	}
 
 	const contents = collectImportsContent(index, program);

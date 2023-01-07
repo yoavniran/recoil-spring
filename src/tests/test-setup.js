@@ -2,13 +2,13 @@ import React from "react";
 import "global-jsdom/register";
 import { render, renderHook } from "@testing-library/react";
 import { expect } from "chai";
-import sinon from "sinon";
+import sinon, { stub, restore as sinonRestore } from "sinon";
 import { RecoilEnv, RecoilRoot } from "recoil";
 
 global.expect = expect;
 global.sinon = sinon;
 
-global.stubProp = (obj, property = "default") => sinon.stub(obj, property);
+global.stubProp = (obj, property = "default") => stub(obj, property);
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -28,6 +28,6 @@ global.recoilRenderHook = (ui, options) =>
 
 export const mochaHooks = {
 	afterEach: () => {
-		sinon.restore();
+		sinonRestore();
 	},
 };
