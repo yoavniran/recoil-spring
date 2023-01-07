@@ -21,7 +21,7 @@ export type SelectorHook<T> = {
 	selector: any;
 }
 
-type READONLY_SELECTOR = true | false;
+export type READONLY_SELECTOR = true | false;
 
 export type SelectorHookType<T, WRITEABLE extends READONLY_SELECTOR> =
 	WRITEABLE extends true ?

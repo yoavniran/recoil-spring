@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
     "outDir": "lib/ts",
     "baseUrl": ".",
     "module": "commonjs",
@@ -9,15 +11,15 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "noImplicitAny": true,
     "strictNullChecks": true,
-    "lib": ["esnext", "dom"],
+    "lib": ["es2015"],
     "types": [
-      "cypress",
-      "@testing-library/cypress"
     ]
   },
   "include": [
     "./types/**/*"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

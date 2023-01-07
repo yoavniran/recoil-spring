@@ -36,4 +36,4 @@ jobs:
         uses: actions/checkout@v3
       - name: node install
         uses: ./.github/actions/node-install
-      - run: yarn types
+      - run: yarn ts:test

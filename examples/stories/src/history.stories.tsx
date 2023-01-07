@@ -40,10 +40,10 @@ const HistoryButtons: FC = () => {
 	return (
 		<div style={{ display: "flex", gap: 10, justifyContent: "space-around" }}>
 			<button id="history-back" onClick={goBack} disabled={previousCount === 0 || undefined}>
-				back
+				back ({previousCount})
 			</button>
 			<button id="history-forward" onClick={goForward} disabled={nextCount === 0 || undefined}>
-				forward
+				forward ({nextCount})
 			</button>
 		</div>
 	);

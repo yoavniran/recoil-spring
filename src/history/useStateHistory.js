@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import {
 	isRecoilValue,
 	useRecoilTransactionObserver_UNSTABLE as useRecoilTransactionObserver,
@@ -56,14 +56,11 @@ const useStateHistory = ({ include, maxItems = DEFAULT_MAX_ITEMS, merge = true, 
 		}
 	});
 
-	const goForward = useCallback(() => doTimeTravel(1), [doTimeTravel]);
-	const goBack = useCallback(() => doTimeTravel(-1), [doTimeTravel]);
-
 	return {
 		previousCount: counters[0],
 		nextCount: counters[1],
-		goForward,
-		goBack,
+		goForward: () => doTimeTravel(1),
+		goBack: () => doTimeTravel(-1),
 	};
 };
 
