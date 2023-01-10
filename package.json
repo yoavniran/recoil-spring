@@ -4,7 +4,7 @@
   "description": "Jumpstart Recoil - less boilerplate, more fun.",
   "main": "index.cjs.js",
   "module": "index.es.js",
-  "types": "types/index.d.ts",
+  "types": "lib/ts/index.d.ts",
   "repository": "https://github.com/yoavniran/recoil-spring",
   "author": "yoav niran",
   "keywords": [
@@ -16,9 +16,9 @@
   ],
   "license": "MIT",
   "scripts": {
+    "clean": "rimraf lib",
     "build": "yarn clean; rollup -c --bundleConfigAsCjs",
     "watch": "yarn build --watch",
-    "clean": "rimraf lib",
     "lint": "eslint ./src --cache",
     "lint:nocache": "eslint ./src",
     "mocha": "NODE_ENV=test mocha --parallel",

@@ -24,7 +24,9 @@
 Think React Toolkit or MobX State Tree but for Recoil. Opinionated but not too much :) 
 
 
-no dependencies (beyond React & Recoil)
+no dependencies (beyond peers: React & Recoil)
+
+Tiny !
 
 
 ## Documentation

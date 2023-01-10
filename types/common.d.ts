@@ -4,8 +4,9 @@ import {
 	ReadOnlySelectorOptions,
 	ResetRecoilState,
 	SetRecoilState,
-	RecoilState,
+	RecoilState, MutableSnapshot,
 } from "recoil";
+import { Spring } from "./spring";
 
 export type HookReturnedSetter<T> = (val: T) => void;
 
@@ -38,6 +39,8 @@ export type SelectorSetter<T> = (newValue: T, actions: SelectorSetterActions<T>)
 
 export type SelectorGetter<T> = (get: GetRecoilValue, getCallback: GetCallback, getTracker: (atomFamily: (pararm: any) => any) => RecoilState<Array<any>>) => T;
 
+export type FamilySelectorGetter<T, P = string> = (param: P, get: GetRecoilValue) => any;
+
 export type SelectorParams = Pick<ReadOnlySelectorOptions<any>, "dangerouslyAllowMutability" | "cachePolicy_UNSTABLE">;
 
 export type AtomMetadata = {
@@ -47,3 +50,10 @@ export type AtomMetadata = {
 	isTracker: boolean;
 	tracked: string;
 };
+
+export interface StateInitializerProps{
+	snapshot: MutableSnapshot;
+	spring: Spring<any>;
+}
+
+export type StateInitializer = (props: StateInitializerProps) => void;

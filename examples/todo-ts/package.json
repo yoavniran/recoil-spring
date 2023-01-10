@@ -1,0 +1,19 @@
+{
+  "name": "recoil-spring-ex-todos",
+  "version": "1.0.0",
+  "description": "example of recoil-spring todos app",
+  "main": "src/index.ts",
+  "author": "yoav niran",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "start": "webpack serve"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recoil-spring": "link:../..",
+    "styled-components": "^5.3.6"
+  }
+}

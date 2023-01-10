@@ -37,4 +37,7 @@ const createFamilyTrackerSelectorHook = (key, family, customGetter = null, selec
 	return useHook;
 };
 
-export default createFamilyTrackerSelectorHook;
+export {
+	createFamilyTrackerSelectorHook
+};
+

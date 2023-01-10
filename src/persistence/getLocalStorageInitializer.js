@@ -3,7 +3,7 @@ const getLocalStorageInitializer = ({
 	                                    customInitializer = null,
 	                                    onErrorHandler = null,
                                     }) => {
-	return ({ set, spring }) => {
+	return ({ snapshot, spring }) => {
 		let data;
 
 		try {
@@ -27,17 +27,17 @@ const getLocalStorageInitializer = ({
 							//set atom family members correctly
 							Object.entries(value)
 								.forEach(([param, member]) => {
-									set(atom(param), member);
+									snapshot.set(atom(param), member);
 								});
 						} else {
-							set(atom, value);
+							snapshot.set(atom, value);
 						}
 					}
 				});
 		}
 
 		if (customInitializer) {
-			customInitializer(data, set);
+			customInitializer(data, snapshot);
 		}
 	};
 };

@@ -24,8 +24,7 @@ const createSelectorHook = (key, getter, setter = null, selectorParams = {}) => 
 const createSelectorHookWithKey = (key, getter, setter = null, selectorParams) =>
 	createSelectorHook(key, getter, setter, selectorParams);
 
-export default createSelectorHook;
-
 export {
+	createSelectorHook,
 	createSelectorHookWithKey
 };

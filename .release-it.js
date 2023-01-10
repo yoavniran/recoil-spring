@@ -8,6 +8,16 @@ module.exports = {
 	  "releaseName": "Version ${version}",
   },
 	"hooks": {
-		"before:init": ["yarn mocha", "yarn build"],
+		"before:init": [
+			//tests
+			"yarn lint:nocache",
+			"yarn mocha",
+			"yarn ts:test",
+
+			//build
+			"yarn build",
+			"yarn ts:gen",
+
+		],
 	}
 };
