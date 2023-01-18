@@ -1,7 +1,7 @@
 import React from "react";
 import SpringRoot from "../SpringRoot";
 import createSpring from "../spring";
-import createGetSetHooks from "../createGetSetHooks";
+import { createGetSetHooks } from "../createGetSetHooks";
 
 describe("createGetSetHooks tests", () => {
 	const spring = createSpring({

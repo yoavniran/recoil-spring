@@ -6548,6 +6548,11 @@ rambda@^7.1.0:
   resolved "https://registry.yarnpkg.com/rambda/-/rambda-7.4.0.tgz#61ec9de31d3dd6affe804de3bae04a5b818781e5"
   integrity sha512-A9hihu7dUTLOUCM+I8E61V4kRXnN4DwYeK0DwCBydC1MqNI1PidyAtbtpsJlBBzK4icSctEcCQ1bGcLpBuETUQ==
 
+random-name@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/random-name/-/random-name-0.1.2.tgz#20a1ad0efce9976764c5dd3c418c7018b57e816d"
+  integrity sha512-3UHvhW50ZMbm6R11J3G1WeKvvys3GWE0uw5IxPzJjIxG+c0QoIbMlWfRKBlji9boEXPBx4CiSL3XWIkO9T/OVA==
+
 randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/randombytes/-/randombytes-2.1.0.tgz"
@@ -7462,6 +7467,11 @@ text-table@^0.2.0:
   resolved "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
 
+throttle-debounce@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-5.0.0.tgz#a17a4039e82a2ed38a5e7268e4132d6960d41933"
+  integrity sha512-2iQTSgkkc1Zyk0MeVrt/3BvuOXYPl/R8Z0U2xxo9rjwNciaHDG3R+Lm6dh4EeUci49DanvBnuqI6jshoQQRGEg==
+
 throttleit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/throttleit/-/throttleit-1.0.0.tgz"
@@ -7807,6 +7817,11 @@ uuid@^8.3.2:
   resolved "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
+uuid@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
+
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
@@ -8137,22 +8152,9 @@ yargs@^15.0.2, yargs@^15.1.0, yargs@^15.3.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^17.3.1:
+yargs@^17.3.1, yargs@^17.6.2:
   version "17.6.2"
   resolved "https://registry.npmjs.org/yargs/-/yargs-17.6.2.tgz"
-  integrity sha512-1/9UrdHjDZc0eOU0HxOHoS78C69UD3JRMvzlJ7S79S2nTaWRA/whGCTV8o9e/N/1Va9YIV7Q4sOxD8VV4pCWOw==
-  dependencies:
-    cliui "^8.0.1"
-    escalade "^3.1.1"
-    get-caller-file "^2.0.5"
-    require-directory "^2.1.1"
-    string-width "^4.2.3"
-    y18n "^5.0.5"
-    yargs-parser "^21.1.1"
-
-yargs@^17.6.2:
-  version "17.6.2"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.6.2.tgz#2e23f2944e976339a1ee00f18c77fedee8332541"
   integrity sha512-1/9UrdHjDZc0eOU0HxOHoS78C69UD3JRMvzlJ7S79S2nTaWRA/whGCTV8o9e/N/1Va9YIV7Q4sOxD8VV4pCWOw==
   dependencies:
     cliui "^8.0.1"

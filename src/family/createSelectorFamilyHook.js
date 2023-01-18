@@ -1,7 +1,7 @@
 import { isRecoilValue, selectorFamily, useRecoilCallback, useRecoilValue } from "recoil";
 import { DUMMY_RECOIL_SPRING_ATOM } from "../consts";
 import { getAtomFamilyRootName, isEmpty, isString, isFunction, invariant } from "../utils";
-import getFamilyTrackerSetters from "./getFamilyTrackerSetters";
+import { getFamilyTrackerSetters } from "./getFamilyTrackerSetters";
 
 //TODO: CANT SUPPORT ATOM KEYS WITH DOUBLE __ because recoil uses this as separator! (What does recoil do if you use it?)
 //TODO: Need to support all valid param types - https://recoiljs.org/docs/api-reference/utils/atomFamily#parameter-type
