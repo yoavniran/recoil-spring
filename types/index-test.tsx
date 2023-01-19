@@ -5,7 +5,10 @@ import {
 	createSelectorHook,
 	SelectorSetterActions,
 	createSelectorHookWithKey,
-	createSetterHook, createGetSetHooks,
+	createSetterHook,
+	createGetSetHooks,
+	SpringRoot,
+	useStateHistory,
 } from "./index";
 import { FC } from "react";
 
@@ -80,6 +83,9 @@ const {
 	useSetHook: useTestSet,
 } = createGetSetHooks<number>(spring.atoms.test);
 
+const useStoryHistory = () =>
+	useStateHistory({ include: [spring.atoms.color, spring.atoms.size] });
+
 //--------------------------------------------------
 //components
 
@@ -101,6 +107,26 @@ const ChangeTestValue = () => {
 	);
 };
 
+const HistoryButtons: FC = () => {
+	const {
+		goBack,
+		goForward,
+		nextCount,
+		previousCount,
+	} = useStoryHistory();
+
+	return (
+		<div style={{ display: "flex", gap: 10, justifyContent: "space-around" }}>
+			<button id="history-back" onClick={goBack} disabled={previousCount === 0 || undefined}>
+				back ({previousCount})
+			</button>
+			<button id="history-forward" onClick={goForward} disabled={nextCount === 0 || undefined}>
+				forward ({nextCount})
+			</button>
+		</div>
+	);
+};
+
 const App = (): JSX.Element => {
 	const [ color, setColor ] = useAppColor();
 	const computed = useRecoilValue(testSelector);
@@ -113,8 +139,15 @@ const App = (): JSX.Element => {
 	};
 
 	return (
+		<SpringRoot
+			spring={spring}
+			initializer={({ snapshot }) => {
+				snapshot.set(spring.atoms.color, "#FFF");
+			}}
+		>
 		<main style={{ backgroundColor: color }}>
 			<button onClick={onChangeColor}/>
+			<HistoryButtons/>
 			{computed.size}
 			{computed.color}
 			{roColor}
@@ -122,6 +155,7 @@ const App = (): JSX.Element => {
 			<ShowTestValue/>
 			<ChangeTestValue/>
 		</main>
+		</SpringRoot>
 	);
 };
 

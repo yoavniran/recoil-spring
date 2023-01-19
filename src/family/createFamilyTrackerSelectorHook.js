@@ -1,7 +1,6 @@
-import { selector, useRecoilValue } from "recoil";
-import { DUMMY_RECOIL_SPRING_ATOM } from "../consts";
-import { getAtomFamilyRootName, invariant, isString } from "../utils";
-import { TRACKER_EXT } from "./familyTrackerAtom";
+import { useRecoilValue } from "recoil";
+import { isString } from "../utils";
+import { createFamilyTrackerSelector } from "./createFamilyTrackerSelector";
 
 const createFamilyTrackerSelectorHook = (key, family, customGetter = null, selectorParams) => {
 	if (!isString(key)) {
@@ -11,24 +10,7 @@ const createFamilyTrackerSelectorHook = (key, family, customGetter = null, selec
 		key = null;
 	}
 
-	const familyRoot = getAtomFamilyRootName(family);
-	invariant(familyRoot, `recoil:spring - Failed to find root name for atomFamily`);
-	const usedKey = key || familyRoot + TRACKER_EXT + "Selector";
-
-	const hookSelector = selector({
-		key: usedKey,
-		get: ({ get }) => {
-			const spring = get(DUMMY_RECOIL_SPRING_ATOM),
-				trackerAtom = spring.getTrackerAtom(family);
-
-			invariant(trackerAtom, `recoil:spring - Failed to find tracker for ${familyRoot} atomFamily`);
-
-			const trackerData = get(trackerAtom);
-
-			return customGetter ? customGetter(trackerData) : trackerData;
-		},
-		...selectorParams,
-	});
+	const hookSelector = createFamilyTrackerSelector(key, family, customGetter, selectorParams);
 
 	const useHook = () => useRecoilValue(hookSelector);
 
@@ -37,4 +19,7 @@ const createFamilyTrackerSelectorHook = (key, family, customGetter = null, selec
 	return useHook;
 };
 
-export default createFamilyTrackerSelectorHook;
+export {
+	createFamilyTrackerSelectorHook,
+};
+

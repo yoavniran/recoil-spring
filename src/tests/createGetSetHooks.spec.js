@@ -1,47 +1,47 @@
 import React from "react";
 import SpringRoot from "../SpringRoot";
 import createSpring from "../spring";
-import createGetSetHooks from "../createGetSetHooks";
+import { createGetSetHooks } from "../createGetSetHooks";
 
-const spring = createSpring({
-	test: 1,
-});
+describe("createGetSetHooks tests", () => {
+	const spring = createSpring({
+		test: 1,
+	});
 
-const ShowTestValue = ({ useGetValue }) => {
-	const testValue = useGetValue();
+	const ShowTestValue = ({ useGetValue }) => {
+		const testValue = useGetValue();
 
-	return (<span className="testValue">{testValue}</span>);
-};
+		return (<span className="testValue">{testValue}</span>);
+	};
 
-const ChangeTestValue = ({ useSetValue }) => {
-	const setValue = useSetValue();
+	const ChangeTestValue = ({ useSetValue }) => {
+		const setValue = useSetValue();
 
-	return (
-		<button
-			className="changeValueButton"
-			onClick={() => setValue((prev) => prev + 1)}>
-			change
-		</button>
-	);
-};
+		return (
+			<button
+				className="changeValueButton"
+				onClick={() => setValue((prev) => prev + 1)}>
+				change
+			</button>
+		);
+	};
 
-export const Simple = ({ name, children }) => {
-	return (
-		<SpringRoot spring={spring}>
-			<div className={name}>
-				<h2>Simple GetSet Hook</h2>
-				{children}
-			</div>
-		</SpringRoot>
-	);
-};
+	const Simple = ({ name, children }) => {
+		return (
+			<SpringRoot spring={spring}>
+				<div className={name}>
+					<h2>Simple GetSet Hook</h2>
+					{children}
+				</div>
+			</SpringRoot>
+		);
+	};
 
-const {
-	useGetHook: testGetHook,
-	useSetHook: testSetHook,
-} = createGetSetHooks(spring.atoms.test);
+	const {
+		useGetHook: testGetHook,
+		useSetHook: testSetHook,
+	} = createGetSetHooks(spring.atoms.test);
 
-describe("createGetSetHooks", () => {
 	describe("one atom", () => {
 		const TestAtom = () =>
 			<Simple name="one-atom">
@@ -91,6 +91,4 @@ describe("createGetSetHooks", () => {
 		// 	cy.mount(<Simple/>);
 		// });
 	});
-
-
 });

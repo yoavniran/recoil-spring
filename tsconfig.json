@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "strict": true,
-//    "baseUrl": "../node_modules",
+    "outDir": "lib/ts",
+    "baseUrl": ".",
     "module": "commonjs",
     "target": "es2020",
     "jsx": "react",

@@ -8,12 +8,11 @@ import CollageCreator from "../components/CollageCreator";
 import StateLogger from "../components/StateLogger";
 import StatePersister from "../components/StatePersister";
 
-const App = () => {
-	const initializeRecoil = getLocalStorageInitializer({
-		key: LS_KEY,
-		// customInitializer: collageStateInitializer,
-	});
+const initializeRecoil = getLocalStorageInitializer({
+	key: LS_KEY,
+});
 
+const App = () => {
 	return (
 		<SpringRoot
 			spring={spring}

@@ -1,5 +1,9 @@
 # Recoil:Spring
 
+[![recoil-spring CI](https://github.com/yoavniran/recoil-spring/actions/workflows/recoil-spring-ci.yml/badge.svg)](https://github.com/yoavniran/recoil-spring/actions/workflows/recoil-spring-ci.yml)
+
+
+
 ![Recoil:Spring Logo](#gh-dark-mode-only)
 ![Recoil:Spring Logo](#gh-light-mode-only)
 
@@ -20,7 +24,9 @@
 Think React Toolkit or MobX State Tree but for Recoil. Opinionated but not too much :) 
 
 
-no dependencies (beyond React & Recoil)
+no dependencies (beyond peers: React & Recoil)
+
+Tiny !
 
 
 ## Documentation

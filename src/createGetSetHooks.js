@@ -30,8 +30,7 @@ const createGetSetHooks = (key, getter, setter, selectorParams = {}) => {
 const createGetSetHooksWithKey = (key, getter, setter = null, selectorParams) =>
 	createGetSetHooks(key, getter, setter, selectorParams);
 
-export default createGetSetHooks;
-
 export {
+	createGetSetHooks,
 	createGetSetHooksWithKey,
 };

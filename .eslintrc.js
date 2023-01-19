@@ -129,6 +129,7 @@ module.exports = {
 			"recoilRenderHook": "readonly",
 			"stubProp": "readonly",
 			"jsdom": "readonly",
+			"cy": "readonly",
 		},
 		"extends": ["plugin:mocha/recommended"],
 		"rules": {
@@ -144,5 +145,26 @@ module.exports = {
 			"no-unused-expressions": 0,
 			"chai-friendly/no-unused-expressions": 2,
 		},
-	}],
+	},
+		{
+			"files": ["*.spec.js"],
+			"plugins": [],
+			"env": {},
+			"globals": {
+				"cy": "readonly",
+			},
+			// "extends": ["plugin:mocha/recommended"],
+			"rules": {
+				"no-empty": 0,
+				"import/first": 0,
+				"no-new-object": 0,
+				"no-mixed-spaces-and-tabs": 0,
+				"object-curly-spacing": 0,
+				"no-unexpected-multiline": 0,
+				"react/jsx-no-bind": 0,
+				"no-async/no-async": 0,
+				"no-unused-expressions": 0,
+				"no-console": 0,
+			},
+		}],
 };

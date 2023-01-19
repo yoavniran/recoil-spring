@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useGotoRecoilSnapshot } from "recoil";
 import { useSpring } from "../context";
 
@@ -17,7 +17,12 @@ const getIsMergableNode = (node, include, spring) => {
 	return isMergable;
 };
 
-const getTargetSnapshot = ({ currentSnapshot, nextSnapshot, latestSnapshot, include, navMutator, merge, spring }) => {
+const getTargetSnapshot = ({ currentSnapshot, nextSnapshot, latestSnapshot,
+	                           include,
+	                           navMutator,
+	                           merge,
+	                           spring,
+                           }) => {
 	const targetSnapshot = merge ? (latestSnapshot || currentSnapshot) : nextSnapshot;
 
 	return (!merge && !navMutator) ?
@@ -76,7 +81,7 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 			});
 	}, [next, previous, current, latest]);
 
-	const doTimeTravel = useCallback((direction) => {
+	const doTimeTravel = (direction) => {
 		const dirSnapshots = direction < 0 ? previous : next;
 
 		if (dirSnapshots.length) {
@@ -101,7 +106,7 @@ const useStateTimeTravel = ({ include, maxItems, navMutator = null, merge = true
 			setCurrent(targetSnapshot);
 			gotoSnapshot(targetSnapshot);
 		}
-	}, [previous, next, current, include, merge, navMutator, spring, gotoSnapshot]);
+	};
 
 	const addHistory = (prevSnap, nextSnap) => {
 		//store the previous snapshot in the history

@@ -12,7 +12,7 @@ const SpringRoot = ({
 	const springUsed = isFunction(spring) ? spring() : spring;
 
 	const initState = initializer ?
-		({ set }) => initializer({ set, spring: springUsed }) : undefined;
+		(snapshot) => initializer({ snapshot, spring: springUsed }) : undefined;
 
 	return (
 		<RecoilRoot

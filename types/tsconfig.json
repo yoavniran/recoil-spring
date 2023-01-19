@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "outDir": "lib/ts",
+    "baseUrl": ".",
+    "module": "commonjs",
+    "target": "es2020",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "lib": ["es2015"],
+    "types": [
+    ]
+  },
+  "include": [
+    "./types/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

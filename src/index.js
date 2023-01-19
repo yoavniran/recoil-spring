@@ -1,10 +1,18 @@
 export createSpring from "./spring";
 export SpringRoot from "./SpringRoot";
 export useSpring from "./context/useSpring";
-export createSelectorHook from "./createSelectorHook";
 export createSetterHook from "./createSetterHook";
 export createTransactionHook from "./createTransactionHook";
-export createGetSetHooks from "./createGetSetHooks";
+
+export {
+	createSelectorHook,
+	createSelectorHookWithKey
+} from "./createSelectorHook";
+
+export {
+	createGetSetHooks,
+	createGetSetHooksWithKey,
+} from "./createGetSetHooks";
 
 export {
 	useLocalStoragePersistence,
@@ -18,6 +26,7 @@ export {
 
 export {
 	createSelectorFamilyHook,
+	createFamilyTrackerSelector,
 	createFamilyTrackerSelectorHook,
 } from "./family";
 
