@@ -3,6 +3,7 @@ export SpringRoot from "./SpringRoot";
 export useSpring from "./context/useSpring";
 export createSetterHook from "./createSetterHook";
 export createTransactionHook from "./createTransactionHook";
+export { createReactiveSetterHook } from "./createReactiveSetterHook";
 
 export {
 	createSelectorHook,
