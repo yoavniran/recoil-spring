@@ -36,7 +36,7 @@ describe("createReactiveSetterHook tests", () => {
 		const [item] = useItem(id);
 
 		return <li title={item.id}>
-			{item.name} (status = {item.pending ? "Pending!" : `Done [${item.time}]`})
+			{item.name} <span className="item-status">(status = {item.pending ? "Pending!" : `Done [${item.time}]`})</span>
 		</li>;
 	};
 
@@ -84,9 +84,9 @@ describe("createReactiveSetterHook tests", () => {
 				time: initTime
 			})));
 		}, delay));
-	}
+	};
 
-	it("should use debounce to reduce external calls", () => {
+	it.only("should use debounce to reduce external calls", () => {
 		const getNewDataForItemsSpy =
 			cy.spy(getNewDataForItems)
 				.as("debouncedSpy");
@@ -130,6 +130,8 @@ describe("createReactiveSetterHook tests", () => {
 			.click();
 
 		cy.get("@debouncedSpy").should("have.been.calledOnce");
+
+		cy.get("li .item-status").should("contain.text", "status = Done");
 	});
 
 	it("should use throttle to reduce external calls", () => {
@@ -176,5 +178,7 @@ describe("createReactiveSetterHook tests", () => {
 			.click();
 
 		cy.get("@throttledSpy").should("have.been.calledThrice");
+
+		cy.get("li .item-status").should("contain.text", "status = Done");
 	});
 });
