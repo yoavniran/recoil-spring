@@ -26,6 +26,7 @@ export {
 
 export {
 	createSelectorFamilyHook,
+	createFamilyTrackerSelector,
 	createFamilyTrackerSelectorHook,
 } from "./family";
 

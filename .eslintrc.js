@@ -164,6 +164,7 @@ module.exports = {
 				"react/jsx-no-bind": 0,
 				"no-async/no-async": 0,
 				"no-unused-expressions": 0,
+				"no-console": 0,
 			},
 		}],
 };
