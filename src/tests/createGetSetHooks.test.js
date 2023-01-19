@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { selector, atom } from "recoil";
 import * as createSelector from "../createSelector";
-import createGetSetHooks from "../createGetSetHooks";
+import { createGetSetHooks } from "../createGetSetHooks";
 
 describe("createGetSetHooks tests", () => {
 	let createSelectorStub;

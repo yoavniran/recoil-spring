@@ -37,4 +37,6 @@ const getFamilyTrackerSetters = ({ get, set, reset, spring }) => {
 	};
 };
 
-export default getFamilyTrackerSetters;
+export {
+	getFamilyTrackerSetters
+};

@@ -74,6 +74,7 @@
     "mocha-junit-reporter": "^2.2.0",
     "mocha-multi-reporters": "^1.5.1",
     "nyc": "^15.1.0",
+    "random-name": "^0.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recoil": "^0.7.6",
@@ -81,10 +82,13 @@
     "rollup": "^3.7.4",
     "sinon": "^15.0.0",
     "typescript": "^4.9.4",
+    "uuid": "^9.0.0",
     "yargs": "^17.6.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "dependencies": {}
+  "dependencies": {
+    "throttle-debounce": "^5.0.0"
+  }
 }
