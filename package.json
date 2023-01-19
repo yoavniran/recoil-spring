@@ -1,6 +1,6 @@
 {
   "name": "recoil-spring",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Jumpstart Recoil - less boilerplate, more fun.",
   "main": "index.cjs.js",
   "module": "index.es.js",
