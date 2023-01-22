@@ -1,10 +1,14 @@
 import { updateAtomTracker } from "./familyTrackerAtom";
 
 const getFamilyTrackerSetters = ({ get, set, reset, spring }) => {
-	const setWithTracker = (atom, val) => {
+	const setWithTracker = (atom, val, atStart = false) => {
 		updateAtomTracker(spring, atom, (trackerName, param) => {
 			set(spring.getAtom(trackerName), (prev) =>
-				prev.includes(param) ? prev : [...prev, param]);
+				prev.includes(param) ?
+					//already exists, dont add
+					prev :
+					//new param, add as last by default or at start if requested
+					(atStart ? [param, ...prev] : [...prev, param]));
 		});
 
 		set(atom, val);
@@ -23,7 +27,7 @@ const getFamilyTrackerSetters = ({ get, set, reset, spring }) => {
 
 	const resetFamily = (atomFamily) => {
 		const trackerAtom = spring.getTrackerAtom(atomFamily),
-		 tracker = get(trackerAtom);
+			tracker = get(trackerAtom);
 
 		tracker.forEach((index) => reset(atomFamily(index)));
 
@@ -38,5 +42,5 @@ const getFamilyTrackerSetters = ({ get, set, reset, spring }) => {
 };
 
 export {
-	getFamilyTrackerSetters
+	getFamilyTrackerSetters,
 };
