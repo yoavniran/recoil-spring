@@ -7,3 +7,4 @@ export * from "./createGetSetHooks";
 export * from "./history";
 export * from "./persistence";
 export * from "./springTypes";
+export * from "./family";

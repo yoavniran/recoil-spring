@@ -4,7 +4,7 @@ import {
 	ReadOnlySelectorOptions,
 	ResetRecoilState,
 	SetRecoilState,
-	RecoilState, MutableSnapshot,
+	RecoilState, MutableSnapshot, DefaultValue,
 } from "recoil";
 import { Spring } from "./spring";
 
@@ -29,13 +29,25 @@ export type SelectorHookType<T, WRITEABLE extends READONLY_SELECTOR> =
 		SelectorHook<T> :
 		ReadonlySelectorHook<T>;
 
-export type SelectorSetterActions<T>  = {
-	get: GetRecoilValue,
-	set: SetRecoilState,
-	reset: ResetRecoilState,
-};
+export interface SelectorSetterActions<T>  {
+	get: GetRecoilValue;
+	set: SetRecoilState;
+	reset: ResetRecoilState;
+}
+
+export type SetRecoilFamilyState = <T>(
+	recoilVal: RecoilState<T>,
+	newVal: T | DefaultValue | ((prevValue: T) => T | DefaultValue),
+	atStart?: boolean
+) => void;
+
+export interface FamilySelectorSetterActions<T> extends SelectorSetterActions<T> {
+	set: SetRecoilFamilyState;
+}
 
 export type SelectorSetter<T> = (newValue: T, actions: SelectorSetterActions<T>) => void;
+
+export type FamilySelectorSetter<T> = (newValue: T, actions: FamilySelectorSetterActions<T>) => void;
 
 export type SelectorGetter<T> = (get: GetRecoilValue, getCallback: GetCallback, getTracker: (atomFamily: (pararm: any) => any) => RecoilState<Array<any>>) => T;
 
