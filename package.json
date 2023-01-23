@@ -32,7 +32,7 @@
     "cy:comp": " cypress open --component --browser chrome"
   },
   "peerDependencies": {
-    "recoil": ">=0.7.6"
+    "recoil": "=0.7.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
